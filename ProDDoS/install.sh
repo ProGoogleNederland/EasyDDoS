@@ -12,10 +12,10 @@ cp -r ProDDoS Stats
 cp -r ProDDoS DDoS
 rm -rf Pro*
 cd DDoS
-pip3 install -r requirements.txt
+python3 -m pip install -r requirements.txt
 cd ../
 clear
-read -r -p "Want to read usage information? [y/N] " response
+read -r -p "Want to read Manual information? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
 echo ""
@@ -107,76 +107,12 @@ echo " __ Other - Run With: start.py help __"
 echo "STOP       | STOP All Attacks"
 echo "TOOLS      | Console Tools"
 echo "HELP       | Show Usage Script"
+echo ""
+read -p "Great now you know what you are doing! Press enter to start using the script"
 else
 echo ""
 echo ""
-read -p "Great you know what you are doing! Press enter to continue"
-fi
-clear
-echo ""
-echo ""
-echo " ONLY EDIT FILE BETWEEN:"
-echo "### START EDITING HERE ###"
-echo "AND"
-echo "###### STOP EDITING #####"
-read -r -p "Do you understand and do you want to edit attack script? [y/N] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-  nano attack.sh
-  echo ""
-  echo ""
-  read -p "Press enter to setup loop..."
-else
-  echo ""
-  echo ""
-	read -p "Press enter to run enable or disable loop..."
-fi
-clear
-echo ""
-echo ""
-read -r -p "Do you want to loop script every hour? [y/N] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-    screen -d -m -S setCrontab && screen -S setCrontab -X stuff $'crontab -e\n' && sleep 5 && screen -S setCrontab -X stuff $'* */1 * * * ./attack.sh\n' && screen -S setCrontab -X stuff $'^x\n' && screen -S setCrontab -X stuff $'y\n' && screen -S setCrontab -X stuff $'\n' && screen -S setCrontab -X stuff $'^a^d\n' 
-read -p "Running loop in background every hour. Press enter to continue..."
-  echo ""
-  echo ""
-else
-  echo ""
-  echo ""
-	read -p "Press enter if you want to start attack now only once..."
-fi
-read -r -p "Start attack now? [y/N] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-then
-echo "========================================"
-echo "=========== GETTING READY  ============"
-echo "========================================"
-pkill screen
-sleep 3
-echo ""
-echo ""
-clear
-echo "========================================"
-echo "===========  STARTING STATS ============"
-echo "========================================"
-screen -d -m -S Stats && screen -S Stats -X stuff $'cd Stats\n' && screen -S Stats -X stuff $'python3 start.py tools\n' && screen -S Stats -X stuff $'dstat\n'
-sleep 6
-echo ""
-echo ""
-clear
-echo "========================================"
-echo "==========  STARTING ATTACK  ==========="
-echo "========================================"
-echo ""
-echo ""
-screen -d -m -S DDoS && screen -r DDoS -X stuff $'./attack.sh\n'
-read -p "If you setup the crontab it will run 58 min and restarts 2 min later to loop attack. Running on background. Done! Press enter to exit..."
-  screen -S DDoS -X stuff $'^a^d\n' 
-else
-	echo ""
-  echo ""
-  read -p "Attack starting in 1 hour of you enabled loop. Press enter to exit..."
+read -p "Great you know what you are doing! Press enter to start using the script"
 fi
 exit 0
 
