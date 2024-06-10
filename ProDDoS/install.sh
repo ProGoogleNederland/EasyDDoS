@@ -6,14 +6,7 @@ echo ""
 echo ""
 apt -y update
 apt -y install curl wget libcurl4 libssl-dev python3 python3-pip make cmake automake autoconf m4 build-essential git
-chmod +rwx *.sh
-cd
-cp -r ProDDoS Stats
-cp -r ProDDoS DDoS
-rm -rf Pro*
-cd DDoS
 python3 -m pip install -r requirements.txt
-cd ../
 clear
 read -r -p "Want to read Manual information? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
